@@ -19,6 +19,7 @@ def title_screen():
     print('              - Help -              ')
     print('              -Exit -               ')
     title_choice()
+
 ### Title Screen Choice ###
 def title_choice():
     choice = input('> ')
@@ -26,11 +27,11 @@ def title_choice():
         print('I do not understand, please choose again.')
         choice = input('> ')
     if choice.lower() == 'start':
-        start_game()
+        pass #start_game()
     elif choice.lower() == 'help':
-        help_menu()
+        pass #help_menu()
     elif choice.lower() == 'exit':
-        exit_game()
+        sys.exit()
 
 
 
