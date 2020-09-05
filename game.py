@@ -8,6 +8,12 @@ import time # contains counter functions
 import random # contains rnd functions
 
 screen_width = 100
+### Speech Text Function ###
+def speak(x):
+    for letter in x:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(0.03)
 
 ### Title Screen ###
 def title_screen():
@@ -24,7 +30,7 @@ def title_screen():
 def title_choice():
     choice = input('> ')
     while choice.lower() not in ['start', 'help', 'exit']:
-        print('I do not understand, please choose again.')
+        speak('I do not understand, please choose again.')
         choice = input('> ')
     if choice.lower() == 'start':
         start_game()
@@ -47,8 +53,9 @@ def help_menu():
 
 ### start_game ###
 def start_game():
-    print('PROSCH DISTRICT 4B: 5th rebmet')
-    choice = input('You there .............. NUMBER FOURTY FIVE! What is your name?')
+    speak('PROSCH DISTRICT 4B: 5th rebmet')
+    speak('You there .............. NUMBER FOURTY FIVE! What is your name?')
+    choice = input('> ')
     if choice.lower in ['q', 'quit', 'exit', 'finish', 'end']:
             sys.exit
     # character_setup()
