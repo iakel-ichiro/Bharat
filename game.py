@@ -13,7 +13,7 @@ screen_width = 100
 def title_screen():
     os.system('cls') # clears the commad prompt
     print('####################################')
-    print('           Welcome to Ullysis           ')
+    print('          Welcome to Ullysis        ')
     print('####################################')
     print('              - Start -             ')
     print('              - Help -              ')
@@ -33,8 +33,14 @@ def title_choice():
     elif choice.lower() == 'exit':
         sys.exit()
 
-
-
-
+### Help Menu ###
+def help_menu():
+    print('####################################')
+    print('           Help Menu           ')
+    print('####################################')
+    print('1. You must type all commands')
+    print('2. Use UP, RIGHT, LEFT, DOWN to move character')
+    print('3. INTERACT to engage, use, look at an object')
+    title_choice()
 
 title_screen()
