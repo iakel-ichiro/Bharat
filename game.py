@@ -8,6 +8,14 @@ import time # contains counter functions
 import random # contains rnd functions
 
 screen_width = 100
+### Player ###
+class player:
+    def __init__(self):
+        self.name = ''
+        self.skill = ''
+        self.hp = 0
+player1 = player() # Initialise the player before anything else
+
 ### Speech Text Function ###
 def speak(x):
     for letter in x:
