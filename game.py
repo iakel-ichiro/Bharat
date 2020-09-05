@@ -17,7 +17,7 @@ def title_screen():
     print('####################################')
     print('              - Start -             ')
     print('              - Help -              ')
-    print('              -Exit -               ')
+    print('              - Exit -               ')
     title_choice()
 
 ### Title Screen Choice ###
@@ -27,9 +27,9 @@ def title_choice():
         print('I do not understand, please choose again.')
         choice = input('> ')
     if choice.lower() == 'start':
-        pass #start_game()
+        start_game()
     elif choice.lower() == 'help':
-        pass #help_menu()
+        help_menu()
     elif choice.lower() == 'exit':
         sys.exit()
 
@@ -41,6 +41,16 @@ def help_menu():
     print('1. You must type all commands')
     print('2. Use UP, RIGHT, LEFT, DOWN to move character')
     print('3. INTERACT to engage, use, look at an object')
-    title_choice()
+    back = input('                 - Back -                    ')
+    if back.lower() == 'back':
+        title_screen()
+
+### start_game ###
+def start_game():
+    print('PROSCH DISTRICT 4B: 5th rebmet')
+    choice = input('You there .............. NUMBER FOURTY FIVE! What is your name?')
+    if choice.lower in ['q', 'quit', 'exit', 'finish', 'end']:
+            sys.exit
+    # character_setup()
 
 title_screen()
