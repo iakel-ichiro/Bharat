@@ -64,8 +64,10 @@ def start_game():
     speak('PROSCH DISTRICT 4B: 5th rebmet')
     speak('You there .............. NUMBER FOURTY FIVE! What is your name?')
     choice = input('> ')
-    if choice.lower in ['q', 'quit', 'exit', 'finish', 'end']:
-            sys.exit
+    if choice.lower in ['s', 'pause', 'start', 'end', 'q', 'exit']:
+        pause_menu()
+    player1.name = choice
+
     # character_setup()
 
 title_screen()
