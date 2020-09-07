@@ -161,8 +161,8 @@ def title_screen_options():
 			help_menu()
 
 def title_screen():
-	#Clears the terminal of prior code for a properly formatted title screen.
-	os.system('clear')
+	#clss the terminal of prior code for a properly formatted title screen.
+	os.system('cls')
 	#Prints the pretty title.
 	print('#' * 45)
 	print('# Welcome to this text-based puzzle RPG for #')
@@ -306,10 +306,10 @@ def main_game_loop():
 # Execute Game #
 ################
 def setup_game():
-	#Clears the terminal for the game to start.
-	os.system('clear')
+	#clss the terminal for the game to start.
+	os.system('cls')
 
-	#QUESTION NAME: Obtains the player's name.
+	# QUESTION NAME: Obtains the player's name.
 	question1 = "Hello there, what is your name?\n"
 	for character in question1:
 		#This will occur throughout the intro code.  It allows the string to be typed gradually - like a typerwriter effect.
@@ -415,7 +415,7 @@ def setup_game():
 		time.sleep(0.2)
 	time.sleep(1)
 
-	os.system('clear')
+	os.system('cls')
 	print("################################")
 	print("# Here begins the adventure... #")
 	print("################################\n")
