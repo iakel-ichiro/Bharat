@@ -1,11 +1,11 @@
-# Text RPG Attempt 2
+# Text RPG Attempt 3
 ### Imports ###
 import cmd # allows command prompt fnction
 import textwrap # wraps text to command prompt screen
 import os
 import sys # allows system functions
 import time # contains counter functions
-import random # contains rnd functions
+import random # contains rnd functionsx
 
 screen_width = 100
 ### Player ###
@@ -23,93 +23,93 @@ class setting:
     def __init__(self):
         self.speach = True
 settings = setting()
-
-#### map setup ###
-location = {
-'center': {
-    DESCRIPTION: "You find yourself standing normally on clouds, strangely.",
-    INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
-    SIDE_UP: 'north',
-    SIDE_DOWN: 'south',
-    SIDE_LEFT: 'east',
-    SIDE_RIGHT: 'west',
-},
-	'north': {
-		DESCRIPTION: "You find yourself standing normally on clouds, strangely.",
-		INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
-		SIDE_UP: 'wall',
-		SIDE_DOWN: 'center',
-		SIDE_LEFT: 'east',
-		SIDE_RIGHT: 'west',
-	},
-	'east': {
-		DESCRIPTION: "You find yourself in lush woodlands, bursting with wildlife\nand a cacaphony of chirping.",
-		INFO: "A rough-looking man sits next to a little cabin.\nHis eyes are glued to bird-watching binoculars.",
-		SIDE_UP: 'north',
-		SIDE_DOWN: 'south',
-		SIDE_LEFT: 'center',
-		SIDE_RIGHT: 'wall',
-	},
-	'south': {
-		DESCRIPTION: 'You find yourself encompassed by strong winds and sandy dunes.',
-		INFO: 'A terrified looking man is hiding among some cacti.',
-		SIDE_UP: 'center',
-		SIDE_DOWN: 'wall',
-		SIDE_LEFT: 'west',
-		SIDE_RIGHT: 'east',
-	},
-	'west': {
-		DESCRIPTION: "You find yourself next to a still, soothing pond.\nAn old man gazes at a table nearby.",
-		INFO: "You greet the old man.\nHe beckons you to look at the intricate twelve-sided table.",
-		SIDE_UP: 'north',
-		SIDE_DOWN: 'south`',
-		SIDE_LEFT: 'wall',
-		SIDE_RIGHT: 'center',
-	}
-}
-
-### moving player ###
-def move_player(move_dest):
-	print("\nYou have moved to the " + move_dest + ".")
-	player1.position = move_dest
-	print_location()
-
-### move action ###
-def move():
-    move_dest = "wall"
-
-    while move_dest == "wall":
-        direction = input("Where would you like move to? ")
-        if direction.lower() == 'forward':
-            move_dest = location[player1.position][SIDE_UP] #if you are on ground, should say north
-        elif direction.lower() == 'left':
-            move_dest = location[player1.position][SIDE_LEFT]
-        elif direction.lower() == 'right':
-            move_dest = location[player1.position][SIDE_RIGHT]
-        elif direction.lower() == 'back':
-            move_dest = location[player1.position][SIDE_DOWN]
-        else:
-            print("Invalid direction command, try using forward, back, left, or right.\n")
-            move()
-    move_player(move_dest)
-    return
+#
+# #### map setup ###
+# location = {
+# 'center': {
+#     DESCRIPTION: "You find yourself standing normally on clouds, strangely\n.",
+#     INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
+#     SIDE_UP: 'north',
+#     SIDE_DOWN: 'south',
+#     SIDE_LEFT: 'east',
+#     SIDE_RIGHT: 'west',
+# },
+#     'north': {
+#         DESCRIPTION: "You find yourself standing normally on clouds, strangely.",
+#         INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
+#         SIDE_UP: 'wall',
+#         SIDE_DOWN: 'center',
+#         SIDE_LEFT: 'east',
+#         SIDE_RIGHT: 'west',
+#     },
+#     'east': {
+#         DESCRIPTION: "You find yourself in lush woodlands, bursting with wildlife\nand a cacaphony of chirping.",
+#         INFO: "A rough-looking man sits next to a little cabin.\nHis eyes are glued to bird-watching binoculars.",
+#         SIDE_UP: 'north',
+#         SIDE_DOWN: 'south',
+#         SIDE_LEFT: 'center',
+#         SIDE_RIGHT: 'wall',
+#     },
+#     'south': {
+#         DESCRIPTION: 'You find yourself encompassed by strong winds and sandy dunes.',
+#         INFO: 'A terrified looking man is hiding among some cacti.',
+#         SIDE_UP: 'center',
+#         SIDE_DOWN: 'wall',
+#         SIDE_LEFT: 'west',
+#         SIDE_RIGHT: 'east',
+#     },
+#     'west': {
+#         DESCRIPTION: "You find yourself next to a still, soothing pond.\nAn old man gazes at a table nearby.",
+#         INFO: "You greet the old man.\nHe beckons you to look at the intricate twelve-sided table.",
+#         SIDE_UP: 'north',
+#         SIDE_DOWN: 'south`',
+#         SIDE_LEFT: 'wall',
+#         SIDE_RIGHT: 'center',
+#     }
+# }
+#
+# ### moving player ###
+# def move_player(move_dest):
+#     print("\nYou have moved to the " + move_dest + ".")
+#     player1.position = move_dest
+#     # print_location()
+#
+# ### move action ###
+# def move():
+#     move_dest = "wall"
+#
+#     while move_dest == "wall":
+#         direction = input("Where would you like move to? ")
+#         if direction.lower() == 'forward':
+#             move_dest = location[player1.position][SIDE_UP] #if you are on ground, should say north
+#         elif direction.lower() == 'left':
+#             move_dest = location[player1.position][SIDE_LEFT]
+#         elif direction.lower() == 'right':
+#             move_dest = location[player1.position][SIDE_RIGHT]
+#         elif direction.lower() == 'back':
+#             move_dest = location[player1.position][SIDE_DOWN]
+#         else:
+#             print("Invalid direction command, try using forward, back, left, or right.\n")
+#             move()
+#     move_player(move_dest)
+#     return
 
 
 
 ### Prompt ###
 def prompt():
-	print("What would you like to do?")
-	action = input("> ")
+    print("What would you like to do?")
+    action = input("> ")
     action = check(action)
     acceptable_actions = ['move', 'go', 'travel', 'walk', 'inspect', 'examine', 'look', 'search']
-	while action.lower() not in acceptable_actions:
-		print("Unknown action command, please try again.\n")
-		action = input("> ")
-	if action.lower() in acceptable_actions[:5]:
-		move()
-	elif action.lower() in acceptable_actions[5:]:
-		pass #examine()
-        
+    while action.lower() not in acceptable_actions:
+        print("Unknown action command, please try again.\n")
+        action = input("> ")
+    if action.lower() in acceptable_actions[:5]:
+        pass # move()
+    elif action.lower() in acceptable_actions[5:]:
+        pass #examine()
+
 ### my cheat ###
 def ask_speach():
     choice = input('Do you want the game to include speach time delays? Y/N')
