@@ -16,83 +16,110 @@ class player:
         self.hp = 100
         self.bag = []
         self.equip = [ None, None, None]
-        self.position = 'center'
-player1 = player() # Initialise the player before anything else
+        self.position = 'b2'
+player = player() # Initialise the player before anything else
 
 class setting:
     def __init__(self):
         self.speach = True
 settings = setting()
-#
+
 # #### map setup ###
-# location = {
-# 'center': {
-#     DESCRIPTION: "You find yourself standing normally on clouds, strangely\n.",
-#     INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
-#     SIDE_UP: 'north',
-#     SIDE_DOWN: 'south',
-#     SIDE_LEFT: 'east',
-#     SIDE_RIGHT: 'west',
-# },
-#     'north': {
-#         DESCRIPTION: "You find yourself standing normally on clouds, strangely.",
-#         INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
-#         SIDE_UP: 'wall',
-#         SIDE_DOWN: 'center',
-#         SIDE_LEFT: 'east',
-#         SIDE_RIGHT: 'west',
-#     },
-#     'east': {
-#         DESCRIPTION: "You find yourself in lush woodlands, bursting with wildlife\nand a cacaphony of chirping.",
-#         INFO: "A rough-looking man sits next to a little cabin.\nHis eyes are glued to bird-watching binoculars.",
-#         SIDE_UP: 'north',
-#         SIDE_DOWN: 'south',
-#         SIDE_LEFT: 'center',
-#         SIDE_RIGHT: 'wall',
-#     },
-#     'south': {
-#         DESCRIPTION: 'You find yourself encompassed by strong winds and sandy dunes.',
-#         INFO: 'A terrified looking man is hiding among some cacti.',
-#         SIDE_UP: 'center',
-#         SIDE_DOWN: 'wall',
-#         SIDE_LEFT: 'west',
-#         SIDE_RIGHT: 'east',
-#     },
-#     'west': {
-#         DESCRIPTION: "You find yourself next to a still, soothing pond.\nAn old man gazes at a table nearby.",
-#         INFO: "You greet the old man.\nHe beckons you to look at the intricate twelve-sided table.",
-#         SIDE_UP: 'north',
-#         SIDE_DOWN: 'south`',
-#         SIDE_LEFT: 'wall',
-#         SIDE_RIGHT: 'center',
-#     }
-# }
-#
+PLACENAME = 'placename'
+DESCRIPTION = 'description'
+INFO = 'info'
+UP = 'north', 'up'
+DOWN = 'south', 'down'
+LEFT = 'left',  'east'
+RIGHT = 'right','west'
+
+# Nested Dictionary
+
+locations = {
+'b2': {
+    PLACENAME: 'Proscht District',
+    DESCRIPTION: "You find yourself standing normally on clouds, strangely\n.",
+    INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
+    UP: 'b1',
+    DOWN: 'b3',
+    LEFT: 'a2',
+    RIGHT: 'c2',
+},
+    'b1': {
+        PLACENAME: 'Skyland',
+        DESCRIPTION: "You find yourself standing normally on clouds, strangely.",
+        INFO: "Even more strange than standing on clouds is the\nbird that begins speaking to you.\n",
+        UP: 'b3',
+        DOWN: 'b2',
+        LEFT: 'x',
+        RIGHT: 'x',
+    },
+    'b3': {
+        PLACENAME: 'Woodland',
+        DESCRIPTION: "You find yourself in lush woodlands, bursting with wildlife\nand a cacaphony of chirping.",
+        INFO: "A rough-looking man sits next to a little cabin.\nHis eyes are glued to bird-watching binoculars.",
+        UP: 'b2',
+        DOWN: 'b1',
+        LEFT: 'x',
+        RIGHT: 'x',
+    },
+    'a2': {
+        PLACENAME: 'Duneland',
+        DESCRIPTION: 'You find yourself encompassed by strong winds and sandy dunes.',
+        INFO: 'A terrified looking man is hiding among some cacti.',
+        UP: 'x',
+        DOWN: 'x',
+        LEFT: 'c2',
+        RIGHT: 'b2',
+    },
+    'c2': {
+        PLACENAME: 'Pondland',
+        DESCRIPTION: "You find yourself next to a still, soothing pond.\nAn old man gazes at a table nearby.",
+        INFO: "You greet the old man.\nHe beckons you to look at the intricate twelve-sided table.",
+        UP: 'x',
+        DOWN: 'x',
+        LEFT: 'b2',
+        RIGHT: 'a2',
+    }
+}
+
+#### Visual Map######
+def print_map_locations():
+    print('\n' + ('#' * (4 + len(locations[player.position][PLACENAME]))))
+    print('# ' + locations[player.position][PLACENAME].upper() + ' #')
+    print('# ' + locations[player.position][DESCRIPTION] + ' #')
+    print('\n' + ('#' * (4 + len(locations[player.position][PLACENAME]))))
+
 # ### moving player ###
-# def move_player(move_dest):
-#     print("\nYou have moved to the " + move_dest + ".")
-#     player1.position = move_dest
-#     # print_location()
-#
+def move_player(move_dest):
+    player.position = move_dest
+    print(move_dest)
+    print("\nYou have moved to the " + locations[move_dest][PLACENAME] + ".")
+
+    print_map_locations()
+
 # ### move action ###
-# def move():
-#     move_dest = "wall"
-#
-#     while move_dest == "wall":
-#         direction = input("Where would you like move to? ")
-#         if direction.lower() == 'forward':
-#             move_dest = location[player1.position][SIDE_UP] #if you are on ground, should say north
-#         elif direction.lower() == 'left':
-#             move_dest = location[player1.position][SIDE_LEFT]
-#         elif direction.lower() == 'right':
-#             move_dest = location[player1.position][SIDE_RIGHT]
-#         elif direction.lower() == 'back':
-#             move_dest = location[player1.position][SIDE_DOWN]
-#         else:
-#             print("Invalid direction command, try using forward, back, left, or right.\n")
-#             move()
-#     move_player(move_dest)
-#     return
+def move():
+    direction = input("Where would you like move to? (up,down, left, right) ")
+    if direction.lower() == 'up':
+        move_dest = locations[player.position][UP]
+    elif direction.lower() == 'left':
+        move_dest = locations[player.position][LEFT]
+    elif direction.lower() == 'right':
+        move_dest = locations[player.position][RIGHT]
+    elif direction.lower() == 'down':
+        move_dest = locations[player.position][DOWN]
+    elif direction.lower() not in ['up', 'left', 'down', 'right']:
+        print("Invalid direction command, try using forward, back, left, or right.\n")
+        move()
+    if move_dest == 'x':
+        print("There is nothing to the " + direction.upper() + "of this place")
+        move()
+
+
+
+    move_player(move_dest)
+    return
 
 
 
@@ -105,9 +132,9 @@ def prompt():
     while action.lower() not in acceptable_actions:
         print("Unknown action command, please try again.\n")
         action = input("> ")
-    if action.lower() in acceptable_actions[:5]:
-        pass # move()
-    elif action.lower() in acceptable_actions[5:]:
+    if action.lower() in acceptable_actions[:3]:
+        move()
+    elif action.lower() in acceptable_actions[4:]:
         pass #examine()
 
 ### my cheat ###
@@ -120,11 +147,11 @@ def ask_speach():
 
 ### death countdown ##
 def death(dmg):
-    if (player1.hp - dmg ) <= 0:
-        while player1.hp > 0:
-            print(f'{player1.hp}  \r', end="")
+    if (player.hp - dmg ) <= 0:
+        while player.hp > 0:
+            print(f'{player.hp}  \r', end="")
             time.sleep(0.02)
-            player1.hp = player1.hp - 1
+            player.hp = player.hp - 1
         print('BAMMMM!')
         speak('"Ughh... Cahunk!\n"', 0.02)
         speak('So long fair friend, may you rest in peace...\n', 0.03)
@@ -165,7 +192,7 @@ def title_choice():
         choice = input('> ')
     if choice.lower() in ['s', 'start']:
         ask_speach()
-        game()
+        start_game()
     elif choice.lower() in ['h', 'help']:
         help_menu()
         title_choice()
@@ -217,9 +244,9 @@ def view_profile():
     print('####################################')
     print('         Character Profile          ')
     print('####################################')
-    print(f'Name: {player1.name}')
-    print(f'Skill: {player1.skill}')
-    print(f'hp: {player1.hp}')
+    print(f'Name: {player.name}')
+    print(f'Skill: {player.skill}')
+    print(f'hp: {player.hp}')
     choice = input('> ')
 
 ### View Map ###
@@ -227,7 +254,7 @@ def view_map():
     print('####################################')
     print('               Map                  ')
     print('####################################')
-    if 'map' in player1.bag:
+    if 'map' in player.bag:
         pass
     else:
         print('It seems you do not have a map yet.')
@@ -243,17 +270,23 @@ def check(x):
 
 
 ### start_game ###
-def game():
-    while player1.hp in range(0,101):
-        speak('PROSCH DISTRICT 4B: 5th rebmet \n')
-        speak('You there .............. NUMBER FOURTY FIVE!\nIve forgotten, What is your name again?\n')
-        choice = input('> ')
-        choice = check(choice)
-        player1.name = choice
-        speak('(You have a gun in your back pocket... kill your self?)')
-        choice = input('> ')
-        choice = check(choice)
-        if choice.lower() in ['ok', 'yes', 'i will', 'alright', "i'll do it"]:
-            death(100)
 
+def game_loop():
+    while (player.hp > 0):
+        prompt()
+
+def start_game():
+    os.system('cls')
+    speak('You there, prisnor 47.... Whats your name')
+    player.name = input('> ')
+    speak("Eh... Oh, I've heard of you, the boys say you were a skillsman. What type where ya?")
+    skill_class = input('Tell the gaurdsman your skill: (Resistant, Breeder, Strongback, Origin) \n> ')
+    if skill_class.lower() in ['resistant','breeder', 'strongback', 'origin']:
+        player.skill = skill_class
+
+    # set skill class attributes
+
+
+    ## Game begins##
+    game_loop()
 title_screen()
